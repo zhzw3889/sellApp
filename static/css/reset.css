@@ -29,6 +29,10 @@ footer, header, menu, nav, section {
     display: block;
 }
 
+/* html, body { */
+/*     overflow: auto; */
+/* } */
+
 body {
     line-height: 1;
 }
