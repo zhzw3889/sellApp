@@ -33,7 +33,10 @@
     <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix" >
         <div class="detail-main">
-
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
         </div>
       </div>
       <div class="detail-close">
@@ -44,6 +47,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+ import star from '../../components/star/star';
+
  export default {
    props: {
      seller: {
@@ -62,6 +67,9 @@
    },
    created() {
      this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+   },
+   components: {
+     star
    }
  };
 </script>
@@ -77,10 +85,10 @@
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
-      font-size: 0/* 消除空白缝隙 */
+      font-size: 0              //删除空白缝隙
       .avatar
         display: inline-block
-        vertical-align: top/* 与右边顶部对齐 */
+        vertical-align: top     //与右边顶部对齐
         img
           border-radius: 2px
       .content
@@ -90,7 +98,7 @@
           margin: 2px 0 8px 0
           .brand
             display: inline-block
-            vertical-align: top/* 与后面的文字对齐 */
+            vertical-align: top //与后面的文字对齐
             width: 30px
             height: 18px
             bg-image('brand')
@@ -148,7 +156,7 @@
       height: 28px
       line-height: 28px
       padding: 0 22px 0 12px
-      white-space: nowrap/* 省略号效果 */
+      white-space: nowrap       //省略号效果
       overflow: hidden
       text-overflow: ellipsis
       /* font-size: 0 */
@@ -156,7 +164,7 @@
       .bulletin-title
         display: inline-block
         vertical-align: top
-        margin-top: 8px/* 先置顶再调整居中 */
+        margin-top: 8px         // 先置顶再调整居中
         width: 22px
         height: 12px
         bg-image('bulletin')
@@ -178,7 +186,7 @@
       width: 100%
       height: 100%
       z-index: -1
-      filter: blur(10px)/* 模糊效果 */
+      filter: blur(10px)        //模糊效果
     .detail
       position: fixed
       z-index: 100
@@ -189,10 +197,20 @@
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
       .detail-wrapper
+        width: 100%
         min-height: 100%        //把X撑到底部
         .detail-main
           margin-top: 64px
           padding-bottom: 64px  //必须, 留下空白用来显示X
+          .name
+            line-height: 16px
+            text-align: center
+            font-size: 16px
+            font-weight: 700
+          .star-wrapper
+            margin-top: 16px
+            padding: 2px 0
+            text-align: center
       .detail-close
         position: relative      //?
         width: 32px
