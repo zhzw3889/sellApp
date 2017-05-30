@@ -29,6 +29,7 @@
 <script type="text/ecmascript-6">
  export default {
    props: {
+     // 由母组件传入，初始值不影响
      selectFoods: {
        type: Array,
        default() {
