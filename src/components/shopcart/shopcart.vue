@@ -18,7 +18,7 @@
             另需配送费￥{{deliveryPrice}}元
           </div>
         </div>
-        <div class="content-right">
+        <div class="content-right" @click.stop.prevent="pay">
           <div class="pay" :class="payClass">
             {{payDesc}}
           </div>
@@ -191,6 +191,12 @@
      },
      hideList() {
        this.fold = true;
+     },
+     pay() {
+       if (this.totalPrice < this.minPrice) {
+         return;
+       }
+       window.alert(`支付${this.totalPrice}元`);
      },
      beforeDrop(el) {
        let count = this.balls.length;
