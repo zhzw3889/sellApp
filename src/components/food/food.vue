@@ -26,6 +26,7 @@
             </div>
           </transition>
         </div>
+        <split></split>
       </div>
     </div>
   </transition>
@@ -35,6 +36,7 @@
  import BScroll from 'better-scroll';
  import Vue from 'vue';
  import cartcontrol from '../cartcontrol/cartcontrol.vue';
+ import split from '../split/split.vue';
 
  export default {
    props: {
@@ -76,7 +78,8 @@
      }
    },
    components: {
-     cartcontrol
+     cartcontrol,
+     split
    }
  };
 </script>
@@ -117,6 +120,7 @@
          font-size: 20px
          color: #fff
    .content
+     position: relative
      padding: 18px
      .title
        line-height: 14px
