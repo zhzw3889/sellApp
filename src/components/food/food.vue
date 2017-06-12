@@ -26,7 +26,13 @@
             </div>
           </transition>
         </div>
-        <split></split>
+        <split v-show="food.info"></split>
+        <div class="info" v-show="food.info">
+          <h1 class="title">商品信息</h1>
+          <p class="text">
+            {{food.info}}
+          </p>
+        </div>
       </div>
     </div>
   </transition>
@@ -172,4 +178,19 @@
        &.fade-enter, &.fade-leave-active
          opacity: 0
          z-index: -1
+   .info
+     padding: 18px
+     .title
+       line-height: 14px
+       margin-bottom: 6px
+       font-size: 14px
+       font-weight: 700
+       color: rgb(7, 17, 27)
+     .text
+       line-height: 24px
+       padding: 0 8px
+       font-size: 12px
+       font-weight: 200
+       colo: rgb(77, 85, 93)
+     
 </style>
