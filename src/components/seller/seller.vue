@@ -28,6 +28,10 @@
             </div>
           </li>
         </ul>
+        <div class="favorite" @click="toggleFavorite">
+          <span class="icon-favorite" :class="{'active': favorite}"></span>
+          <span class="text">{{favoriteText}}</span>
+        </div>
       </div>
       <split></split>
       <div class="bulletin">
@@ -64,6 +68,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+ import {saveToLocal, loadFromLocal} from '../../common/js/store.js';
  import BScroll from 'better-scroll';
  import star from '../star/star.vue';
  import split from '../split/split.vue';
@@ -72,6 +77,18 @@
    props: {
      seller: {
        type: Object
+     }
+   },
+   data() {
+     return {
+       favorite: (() => {
+         return loadFromLocal(this.seller.id, 'favorite', false);
+       })()
+     };
+   },
+   computed: {
+     favoriteText() {
+       return this.favorite ? '已收藏' : '收藏';
      }
    },
    created() {
@@ -92,6 +109,13 @@
      });
    },
    methods: {
+     toggleFavorite(event) {
+       if (!event._constructed) {
+         return;
+       }
+       this.favorite = !this.favorite;
+       saveToLocal(this.seller.id, 'favorite', this.favorite);
+     },
      _initScroll() {
        if (!this.scroll) {
          this.scroll = new BScroll(this.$refs.seller, {
@@ -139,6 +163,7 @@
    width: 100%
    overflow: hidden
    .overview
+     position: relative
      padding: 18px
      .title
        margin-bottom: 8px
@@ -180,6 +205,25 @@
            color: rgb(7, 17, 27)
            .stress
              font-size: 24px
+     .favorite
+       position: absolute
+       // 使图标位置固定，不会随点击左右闪动
+       width: 50px
+       top: 18px
+       right: 11px
+       text-align: center
+       .icon-favorite
+         display: block
+         margin-bottom: 4px
+         line-height: 24px
+         font-size: 24px
+         color: #d4d6d9
+         &.active
+           color: rgb(240, 20, 20)
+       .text
+         line-height: 10px
+         font-size: 10px
+         color: rgb(77, 85, 93)
    .bulletin
      padding: 18px 18px 0 18px
      .title
